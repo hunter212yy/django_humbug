@@ -1,0 +1,6 @@
+<!--<h1>{{ post.post_text }}</h1>-->
+<ul>
+{% for shit in post.post_set.all %}
+    <li>{{ shit.post_text }}</li>
+{% endfor %}
+</ul>
