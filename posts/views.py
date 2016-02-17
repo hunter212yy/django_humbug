@@ -2,6 +2,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 from .models import Post
 
@@ -13,8 +14,5 @@ def index(request):
     return render(request, 'posts/index.html', context)
 
 def detail(request, post_slug):
-    try:
-        post = Post.objects.get(pk=post_slug)
-    except Post.DoesNotExist:
-        raise Http404("Post does not exist")
+    post = get_object_or_404(Post, post_slug=post_slug)
     return render(request, 'posts/detail.html', {'post': post})
