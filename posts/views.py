@@ -12,9 +12,9 @@ def index(request):
     context = {'latest_post_list': latest_post_list}
     return render(request, 'posts/index.html', context)
 
-def detail(request, post_id):
+def detail(request, post_slug):
     try:
-        post = Post.objects.get(pk=post_id)
+        post = Post.objects.get(pk=post_slug)
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
     return render(request, 'posts/detail.html', {'post': post})
