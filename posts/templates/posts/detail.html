@@ -2,9 +2,9 @@
 <h3>{{ post.post_text | safe }}</h3>
 <h4>Tags:</h4>
 
-<!--
+
 <ul>
-{% for shit in post.post_set.all %}
-    <li>{{ shit.post_text }}</li>
+{% for tag in post.tags.all %}
+    <li><a href="{% url 'tag_view' tag.tag_slug %}">{{ tag.tag_text }}</a></li>
 {% endfor %}
-</ul>-->
+</ul>

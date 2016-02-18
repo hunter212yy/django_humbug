@@ -1,9 +1,48 @@
-{% if latest_post_list %}
-    <ul>
-    {% for post in latest_post_list %}
-        <li><a href="{% url 'detail' post.post_slug %}">{{ post.post_title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No posts are available.</p>
+{% if tag %}
+    <h3>Posts with tag {{ tag.tag_text }}.</h3>
+    
+    <div class="pagination">
+    <span class="step-links">
+        {% if shit.has_previous %}
+            <a href="?page={{ shit.previous_page_number }}">previous</a>
+        {% endif %}
+        
+        <span class="current">
+            Page {{ shit.number }} of {{ shit.paginator.num_pages }}.
+        </span>
+        
+        {% if shit.has_next %}
+            <a href="?page={{ shit.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+    </div>
+    
+{% endif %}
+
+
+    {% if latest_post_list %}
+        <ul>
+        {% for post in latest_post_list %}
+            <li><a href="{% url 'detail' post.post_slug %}">{{ post.post_title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts are available.</p>
+    {% endif %}
+{% if kek %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if kek.has_previous %}
+                <a href="?page={{ kek.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ kek.number }} of {{ kek.paginator.num_pages }}.
+            </span>
+
+            {% if kek.has_next %}
+                <a href="?page={{ kek.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+        </div>
 {% endif %}
