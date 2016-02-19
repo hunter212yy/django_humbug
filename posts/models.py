@@ -1,6 +1,7 @@
 from django.utils.text import slugify
 from django.db import models
 from django.core.urlresolvers import reverse
+from fluent_comments.moderation import moderate_model
 
 # Create your models here.
 
@@ -40,3 +41,9 @@ class Post(models.Model):
         return reverse('detail', kwargs={
             'post_slug': self.post_slug,
         })
+
+
+moderate_model(Post,
+    publication_date_field='publication_date',
+    enable_comments_field='enable_comments',
+)

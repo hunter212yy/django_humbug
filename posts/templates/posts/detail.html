@@ -1,3 +1,4 @@
+{% load static %}
 <h1>{{ post.post_title }}</h1>
 <h3 style="white-space:pre; word-wrap: break-word;">{{ post.post_text | safe }}</h3>
 <h4>Tags:</h4>
@@ -8,3 +9,13 @@
     <li><a href="{% url 'tag_view' tag.tag_slug %}">{{ tag.tag_text }}</a></li>
 {% endfor %}
 </ul>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+{% load comments %}
+
+
+<link rel="stylesheet" type="text/css" href="/static/fluent_comments/css/ajaxcomments.css" />
+<script type="text/javascript" src="/static/fluent_comments/js/ajaxcomments.js"></script>
+
+{% render_comment_list for post %}
+{% render_comment_form for post %}
