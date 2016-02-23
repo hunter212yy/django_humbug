@@ -1,0 +1,27 @@
+#shit {
+    background-color: cyan;
+    border-style: dashed;
+    border-radius: 5%;
+}
+
+#pagination {
+    background-color: aliceblue;
+    border-style: solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#szajs {
+    font-size: 0.9em;
+}
+
+#posty {
+    border-style: solid;
+    border-width: 0.2em;
+    border-radius: 4px;
+}
+
+#post_image {
+    max-height: 200px;
+    max-width: 200px;
+}

@@ -4,6 +4,10 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from .models import Post, Tag
 
@@ -11,7 +15,7 @@ from .models import Post, Tag
 
 def index(request):
     latest_post_list = Post.objects.order_by('-pub_date')
-    index_paginator = Paginator(latest_post_list, 3)
+    index_paginator = Paginator(latest_post_list, 7)
     page = request.GET.get('page')
     
     try:
@@ -31,7 +35,7 @@ def detail(request, post_slug):
 
 def tag_view(request, tag_slug):
     tag = get_object_or_404(Tag, tag_slug=tag_slug)
-    paginator = Paginator(tag.post_set.all(), 2)
+    paginator = Paginator(tag.post_set.all(), 4)
     
     page = request.GET.get('page')
     try:

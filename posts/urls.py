@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.conf.urls import include, url, patterns
+from django.conf.urls.static import static
 
 from . import views
 
@@ -13,3 +15,10 @@ urlpatterns = [
 urlpatterns += patterns('',
     url(r'^comments/', include('fluent_comments.urls')),
 )
+
+if settings.SERVE_MEDIA:
+    urlpatterns += patterns("",
+        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.STATIC_ROOT, 'show_indexes': True }),
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.STATIC_ROOT, }),)

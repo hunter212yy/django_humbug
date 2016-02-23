@@ -11,11 +11,10 @@
 </ul>
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-{% load comments %}
-
-
 <link rel="stylesheet" type="text/css" href="/static/fluent_comments/css/ajaxcomments.css" />
 <script type="text/javascript" src="/static/fluent_comments/js/ajaxcomments.js"></script>
+
+{% load comments %}
 
 {% render_comment_list for post %}
 {% render_comment_form for post %}

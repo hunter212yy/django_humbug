@@ -3,6 +3,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from fluent_comments.moderation import moderate_model
 
+
 # Create your models here.
 
 class Tag(models.Model):
@@ -23,6 +24,7 @@ class Post(models.Model):
     post_text = models.TextField()
     pub_date = models.DateTimeField('date published')
     post_slug = models.SlugField(editable=False)
+    image = models.ImageField(default = "<img src='http://shere.buruma.net/wp-content/uploads/2014/09/django.png'>", upload_to='documents/%Y/%m/%d', blank=True, null=True)
     
     tags = models.ManyToManyField(Tag)
     
@@ -41,6 +43,9 @@ class Post(models.Model):
         return reverse('detail', kwargs={
             'post_slug': self.post_slug,
         })
+    
+    def get_text_batch(self):
+        return self.post_text[:250] + "..."
 
 
 moderate_model(Post,
