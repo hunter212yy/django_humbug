@@ -1,5 +1,9 @@
 {% load staticfiles %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'posts/normalize.css' %}" />
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -10,9 +14,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-
-
-<link rel="stylesheet" type="text/css" href="{% static 'posts/normalize.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
 
 
@@ -25,26 +26,29 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">WhiteNoise</a>
+      <a class="navbar-brand" href="{% url 'index' %}">WhiteNoise</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">About</a></li>
+        <li class="active"><a href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="{% url 'flatpage' url='/about/' %}">About</a></li>
+<!--
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More...<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Best albums</a></li>
+            <li><a href="#">Best songs</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Contact</a></li>
             <li class="divider"></li>
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
+-->
       </ul>
+<!--
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
@@ -54,49 +58,39 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
       </ul>
+-->
     </div>
   </div>
 </nav>
 
 
-
-
 {% if tag %}
-    <h3>Posts with tag {{ tag.tag_text }}.</h3>
-    
-    <div class="pagination">
-    <span class="step-links">
-        {% if shit.has_previous %}
-            <a href="?page={{ shit.previous_page_number }}">previous</a>
-        {% endif %}
-        
-        <span class="current">
-            Page {{ shit.number }} of {{ shit.paginator.num_pages }}.
-        </span>
-        
-        {% if shit.has_next %}
-            <a href="?page={{ shit.next_page_number }}">next</a>
-        {% endif %}
-    </span>
+    <div class="col-md-8 col-md-offset-2" id="tagpagination">
+        <h3>Posts with tag <i><b>{{ tag.tag_text }}</b></i>:</h3>
     </div>
-    
 {% endif %}
 
 
 {% if latest_post_list %}
-    <div class="col-md-4 col-md-offset-4" id="shit">
-        <ul>
+    <div class="col-md-8 col-md-offset-2" id="postcontainer">
+        <ul id="post_list">
         {% for post in latest_post_list %}
-            <div id="posty">
-                <li>
-                    <a href="{% url 'detail' post.post_slug %}">
-                        {{ post.post_title }}
-
-                    </a>
-                </li>
-                <div id="szajs">
-                    {{ post.get_text_batch }}
+            <div class="row">
+                <div id="imagerow" class="col-md-1">
                     <img src="{{ post.image.url }}" alt="post image" id="post_image">
+                </div>
+                <div id="postrow" class="col-md-11">
+                    <div class="col-md-10">
+                        <li>
+                            <a href="{% url 'detail' post.post_slug %}">
+                                <h3 id="post_title">{{ post.post_title }}</h3>
+                                {{ post.get_text_batch }}
+                            </a>
+                        </li>
+                    </div>
+                    <div class="col-md-2" id="pubdatecontainer">
+                        {{ post.pub_date }}
+                    </div>
                 </div>
             </div>
         {% endfor %}
@@ -105,22 +99,58 @@
 {% else %}
     <p>No posts are available.</p>
 {% endif %}
+
+
 {% if kek %}
-    <div class="col-md-4 col-md-offset-4" id="pagination">
-        <div class="pagination">
-            <span class="step-links">
+    <div class="col-md-8 col-md-offset-2" id="pagination">
+        <div class="row">
+            <div class="col-md-2" id="pgprevious">
                 {% if kek.has_previous %}
-                    <a href="?page={{ kek.previous_page_number }}">previous</a>
+                    <a href="?page={{ kek.previous_page_number }}"><p>Previous</p></a>
+                {% else %}
+                    <p>Previous</p>
                 {% endif %}
-
-                <span class="current">
-                    Page {{ kek.number }} of {{ kek.paginator.num_pages }}.
-                </span>
-
+            </div>
+            <div class="col-md-8" id="pgcurrent">
+                    <p>Page {{ kek.number }} of {{ kek.paginator.num_pages }}</p>
+            </div>
+            <div class="col-md-2" id="pgnext">
                 {% if kek.has_next %}
-                    <a href="?page={{ kek.next_page_number }}">next</a>
+                    <a href="?page={{ kek.next_page_number }}"><p>Next</p></a>
+                {% else %}
+                    <p>Next</p>
                 {% endif %}
-            </span>
+            </div>
         </div>
     </div>
 {% endif %}
+
+
+{% if tag %}
+    <div class="col-md-8 col-md-offset-2" id="tagpagination">
+        <div class="row">
+            <div class="col-md-2" id="tagpgprevious">
+                {% if shit.has_previous %}
+                    <a href="?page={{ shit.previous_page_number }}"><p>Previous</p></a>
+                {% else %}
+                    <p>Previous</p>
+                {% endif %}
+            </div>
+            <div class="col-md-8" id="tagpgcurrent">
+                    <p>Page {{ shit.number }} of {{ shit.paginator.num_pages }}</p>
+            </div>
+            <div class="col-md-2" id="pgnext">
+                {% if shit.has_next %}
+                    <a href="?page={{ shit.next_page_number }}"><p>Next</p></a>
+                {% else %}
+                    <p>Next</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class=col-md-12 id="footer">
+    <p>WhiteNoise 2016</p>
+    <p>Made by AK</p>
+</div>

@@ -24,9 +24,8 @@
 #postrow {
     background-color: #ebfafa;
     border-radius: 4px;
-    padding: 0 4px 10px;
+    padding: 0 4px;
     margin: 2px;
-    margin-bottom: 10px;
 }
 
 #post_title {
@@ -92,66 +91,4 @@
     border-radius: 10px;
     padding-top: 0.8em;
     text-align: center;
-}
-
-#pubdatecontainer {
-    margin: 10px 0 0;
-    border-right: 1px solid blue;
-}
-
-#footer {
-    margin-top: 2em;
-    text-align: center;
-    border-top: 1px dashed;
-}
-
-#detailcontainer {
-    background-color: #e6faff;
-    border-radius: 10px;
-}
-
-.dont-break-out {
-
-    /* These are technically the same, but use both */
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-
-    -ms-word-break: break-all;
-    /* This is the dangerous one in WebKit, as it breaks things wherever */
-    word-break: break-all;
-    /* Instead use this non-standard one: */
-    word-break: break-word;
-
-    /* Adds a hyphen where the word breaks, if supported (No Blink) */
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-    
-    white-space:normal;
-}
-
-#detailposttext {
-    font-size: 1.35em;
-    line-height: 130%;
-    background-color: #b3edff;
-    border-radius: 10px;
-    padding: 1em;
-    white-space: pre-wrap;
-}
-
-#detailtags {
-    margin: 5em 0 1em;
-    
-}
-
-#detailimage {
-    max-width: 500px;
-    border: 4px solid black;
-    border-radius: 30px;
-}
-
-#detailimagecontainer {
-    text-align: center;
-    margin: 1em 0 2em;
 }

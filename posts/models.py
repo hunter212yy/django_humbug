@@ -23,7 +23,7 @@ class Post(models.Model):
     post_title = models.CharField(max_length=200)
     post_text = models.TextField()
     pub_date = models.DateTimeField('date published')
-    post_slug = models.SlugField(editable=False)
+    post_slug = models.SlugField(editable=False, max_length=200)
     image = models.ImageField(default = "<img src='http://shere.buruma.net/wp-content/uploads/2014/09/django.png'>", upload_to='documents/%Y/%m/%d', blank=True, null=True)
     
     tags = models.ManyToManyField(Tag)
@@ -52,3 +52,4 @@ moderate_model(Post,
     publication_date_field='publication_date',
     enable_comments_field='enable_comments',
 )
+
