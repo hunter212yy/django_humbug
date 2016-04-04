@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'fv&_%&9j8z892rkyfl+5jk8=f@&246@jhp9deycq-)#_t9ry%%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_comments',
     'django.contrib.sites',
+    'django.contrib.flatpages',
 ]
 
 FLUENT_COMMENTS_EXCLUDE_FIELDS = ('url',)
-AKISMET_API_KEY = ""
+AKISMET_API_KEY = "fdc19dd81668"
 COMMENTS_APP = 'fluent_comments'
 
 MIDDLEWARE_CLASSES = [
@@ -57,6 +58,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'humbug_blog.urls'
@@ -131,7 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #MEDIA_URL = '/media/'
@@ -142,7 +144,7 @@ MEDIA_URL = '/site_media/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'site_media', 'static')
 SITE_MEDIA_URL = '/site_media/'
 STATIC_URL = '/site_media/'
-ADMIN_TOOLS_MEDIA_URL = '/site_media/'
+#ADMIN_TOOLS_MEDIA_URL = '/site_media/'
 #ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'site_media'),)
 
